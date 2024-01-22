@@ -1,0 +1,65 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "run test file",
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**",
+      ],
+      "program": "${file}",
+      "runtimeArgs": [
+        "${workspaceRoot}/node_modules/jest/bin/jest.js",
+        "--runInBand",
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "dev",
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**",
+      ],
+      "program": "${workspaceFolder}/src/index.ts",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "node",
+      "env": {
+        "SWCRC": "1",
+        "APP_START_BANNER": "=== my-app ===",
+      },
+      "runtimeArgs": [
+        "--nolazy",
+        "-r", "@swc-node/sourcemap-support",
+        "-r", "@swc-node/register",
+      ],
+    },
+
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "dev_script-whitelabel",
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**",
+      ],
+      "program": "${workspaceFolder}/scripts/whitelabel.js",
+      // "args": ["-n", "ex_pname_1", "--name", "ex_pname_2", "--name=pname"],
+      "args": [
+        "-n", "NEW_NAME",
+        "--version", "1.0.42",
+        "--description", "some desc here",
+        "-k", "kw1,kw2",
+        "-l", "GPL",
+        "-h", "google.com"
+      ],
+    }
+  ]
+}
