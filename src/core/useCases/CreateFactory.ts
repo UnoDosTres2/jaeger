@@ -7,16 +7,13 @@ import {
 export const InputSchema = FactorySchema.omit({
   id: true,
 });
-type Input = z.infer<typeof InputSchema>;
-
-type Output = Factory;
+export type Input = z.infer<typeof InputSchema>;
 
 export default (context: UseCaseContext) =>
-  function CreateFactory(input: Input): Output {
+  function createFactory(input: Input): Factory {
     const newFactory = context.repos.Factory.save(input);
 
     // MAYBE send email
-    // TODO BURADA KALDIK - BU USE-CASE'İ TEST ET
 
     return newFactory;
   };

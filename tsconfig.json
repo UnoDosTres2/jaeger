@@ -3,7 +3,7 @@
   "extends": "@tsconfig/node20/tsconfig.json",
 
   "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.test.ts", "src/**/*.spec.ts"],
+  // "exclude": ["src/**/*.test.ts", "src/**/*.spec.ts"], // TODO If uncommented then none of the ambient types is known by test files - BUT may cause issues on compilation (check it)
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
