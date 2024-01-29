@@ -6,7 +6,7 @@ import type ExternalError from "../errors/ExternalError";
 declare global {
   interface AppContext {
     repos: {
-      Factory: FactoryRepo;
+      Factory: FactoryRepo; // Foo
     };
   }
 }
