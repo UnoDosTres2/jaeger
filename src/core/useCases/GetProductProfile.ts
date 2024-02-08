@@ -19,6 +19,7 @@ type Output = z.infer<typeof OutputSchema>;
 
 export default (context: UseCaseContext) =>
   async function GetProductProfile(input: Input): Promise<Output | null> {
+    // FIXME move this somewhere else (e.g. endpoint function)
     const inputParseResult = InputSchema.safeParse(input);
     if (!inputParseResult.success) {
       throw InputError.fromZodError(inputParseResult.error);
