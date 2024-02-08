@@ -26,5 +26,8 @@ export default (context: UseCaseContext) =>
     }
 
     // TODO BURADAN DEVAM ET (ERO)
-    const product = await context.repos.product.findById(input.id);
+    const product = await context.repos.Product.getById(input.id);
+
+    // FIXME
+    return {} as Output;
   };

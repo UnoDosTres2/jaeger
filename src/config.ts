@@ -1,13 +1,18 @@
 const config: AppConfig = {
   _isConfig: true,
 
+  http: {
+    host: process.env.APP_HOST || "127.0.0.1",
+    port: toNumberWithDefault(process.env.APP_PORT, 8080),
+  },
+
   //
 };
 
 export default config;
 
 /**
- * Try to parse the given string as number. If it fails \
+ * Try to parse the given string as number. If it fails
  * to parse returns the given default value.
  *
  * @param {string} str The string to try to parse as number
