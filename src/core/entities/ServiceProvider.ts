@@ -2,7 +2,6 @@ import { z } from "zod";
 
 export const Schema = z.object({
   id: z.string(),
-  domain: z.string(), // e.g. "ema-tech.net"
   address: z.string(),
   name: z.string(),
   phone: z.string().optional(),

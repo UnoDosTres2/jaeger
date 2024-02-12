@@ -12,6 +12,8 @@ describe("CreateFactory", () => {
       domain: "mycompany.com",
       name: "MyCompany",
       address: "Foo Str.",
+      latitude: 3,
+      longitude: 5,
     };
 
     const context = td.object<UseCaseContext>();
@@ -40,6 +42,8 @@ describe("CreateFactory", () => {
       domain: "mycompany.com",
       name: "MyCompany",
       address: "Foo Str.",
+      longitude: 5,
+      latitude: 10,
     };
 
     const context = td.object<UseCaseContext>();

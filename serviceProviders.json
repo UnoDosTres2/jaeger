@@ -1,0 +1,78 @@
+[
+  {
+    "id": "1",
+    "address": "123 Main St",
+    "name": "ABC Services",
+    "phone": "+1234567890",
+    "longitude": -73.9875,
+    "latitude": 40.7488
+  },
+  {
+    "id": "2",
+    "address": "456 Oak St",
+    "name": "XYZ Solutions",
+    "longitude": -74.006,
+    "latitude": 40.7128
+  },
+  {
+    "id": "3",
+    "address": "789 Pine St",
+    "name": "123 Providers",
+    "phone": "+9876543210",
+    "longitude": -73.9862,
+    "latitude": 40.7549
+  },
+  {
+    "id": "4",
+    "address": "876 Birch St",
+    "name": "Service Hub",
+    "longitude": -74.008,
+    "latitude": 40.725
+  },
+  {
+    "id": "5",
+    "address": "321 Maple St",
+    "name": "Provider 55",
+    "phone": "+1112223334",
+    "longitude": -73.989,
+    "latitude": 40.736
+  },
+  {
+    "id": "6",
+    "address": "543 Elm St",
+    "name": "Elite Services",
+    "phone": "+5556667778",
+    "longitude": -73.982,
+    "latitude": 40.741
+  },
+  {
+    "id": "7",
+    "address": "987 Cedar St",
+    "name": "Tech Innovators",
+    "longitude": -74.001,
+    "latitude": 40.730
+  },
+  {
+    "id": "8",
+    "address": "654 Walnut St",
+    "name": "City Experts",
+    "phone": "+9998887776",
+    "longitude": -73.994,
+    "latitude": 40.745
+  },
+  {
+    "id": "9",
+    "address": "210 Pine St",
+    "name": "Swift Services",
+    "longitude": -74.003,
+    "latitude": 40.718
+  },
+  {
+    "id": "10",
+    "address": "876 Maple St",
+    "name": "Dynamic Solutions",
+    "phone": "+1112223335",
+    "longitude": -73.997,
+    "latitude": 40.752
+  }
+]
