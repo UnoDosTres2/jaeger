@@ -19,7 +19,7 @@ interface AppContext {
  * Populate it by;
  * ```
  * declare global {
- *  interface AppContext {
+ *  interface AppConfig {
  *    // some name and type pair(s), e.g.;
  *    // server: {
  *    //   http: HttpServerConfig;
@@ -30,6 +30,8 @@ interface AppContext {
  */
 interface AppConfig {
   _isConfig: true;
+
+  gracefulShutdownTimeoutMs: number;
 }
 
 type UseCaseContext = Omit<AppContext, "useCases">;

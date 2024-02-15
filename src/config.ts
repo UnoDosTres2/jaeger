@@ -1,9 +1,21 @@
+import { LogLevel } from "./LoggerService";
+
 const config: AppConfig = {
   _isConfig: true,
+
+  gracefulShutdownTimeoutMs: toNumberWithDefault(
+    process.env.APP_GRACEFUL_SHUTDOWN_TIMEOUT_MS,
+    4_000,
+  ),
 
   http: {
     host: process.env.APP_HOST || "127.0.0.1",
     port: toNumberWithDefault(process.env.APP_PORT, 8080),
+    exposeStacktrace: !!process.env.APP_EXPOSE_STACKTRACE || false,
+  },
+
+  logger: {
+    level: toNumberWithDefault(process.env.APP_LOG_LEVEL, LogLevel.INFO),
   },
 
   //
