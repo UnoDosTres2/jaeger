@@ -2,15 +2,19 @@
 import type ExternalError from "../core/errors/ExternalError";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type InternalError from "../core/errors/InternalError";
-import { default as initializeDb } from "./db";
+
+// import { default as initializeDbs } from "./dbs";
+import { default as initializeBackingServices } from "./backingServices";
 import { default as initializeRepos } from "./repos";
 import { default as initializeServices } from "./services";
-import { default as initializeUseCases } from "./useCases";
+import { type UseCases, default as initializeUseCases } from "./useCases";
 
 /** @throws {ExternalError || InternalError} */
-export default async (config: AppConfig): Promise<[TeardownFn, AppContext]> => {
-  const [teardownDb, mongoClient] = await initializeDb(config);
-  const repos = initializeRepos(mongoClient);
+export default async (
+  config: AppConfig,
+): Promise<[TeardownFn, AppContext & { useCases: UseCases }]> => {
+  const [teardownDb, backingServices] = await initializeBackingServices(config);
+  const repos = initializeRepos(backingServices);
   const services = initializeServices(config);
   const useCases = initializeUseCases({
     _isContext: true,

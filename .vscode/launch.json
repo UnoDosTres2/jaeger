@@ -33,13 +33,16 @@
       "runtimeExecutable": "node",
       "env": {
         "SWCRC": "1",
-        "APP_START_BANNER": "=== my-app ===",
+        "MYSQL_DATABASE": "solarhyp",
+        "MYSQL_USER": "root",
+        "MYSQL_PASSWORD": "toor",
       },
       "runtimeArgs": [
         "--nolazy",
         "-r", "@swc-node/sourcemap-support",
         "-r", "@swc-node/register",
       ],
+      "console": "integratedTerminal"
     },
 
     {

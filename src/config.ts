@@ -4,22 +4,58 @@ const config: AppConfig = {
   _isConfig: true,
 
   gracefulShutdownTimeoutMs: toNumberWithDefault(
-    process.env.APP_GRACEFUL_SHUTDOWN_TIMEOUT_MS,
+    getEnvVar("GRACEFULSHUTDOWNTIMEOUTMS", "4000"),
     4_000,
   ),
 
   http: {
-    host: process.env.APP_HOST || "127.0.0.1",
-    port: toNumberWithDefault(process.env.APP_PORT, 8080),
+    host: getEnvVar("HTTP_HOST", "127.0.0.1"),
+    port: toNumberWithDefault(getEnvVar("HTTP_PORT", "8080"), 8080),
     exposeStacktrace: !!process.env.APP_EXPOSE_STACKTRACE || false,
   },
 
   logger: {
-    level: toNumberWithDefault(process.env.APP_LOG_LEVEL, LogLevel.INFO),
+    level: toNumberWithDefault(
+      getEnvVar("LOGGER_LEVEL", LogLevel.INFO.toString()),
+      LogLevel.INFO,
+    ),
+  },
+
+  mysql: {
+    database: getEnvVar("MYSQL_DATABASE"),
+    host: getEnvVar("MYSQL_HOST", "127.0.0.1"),
+    port: toNumberWithDefault(getEnvVar("MYSQL_PORT", "3306"), 3306),
+    user: getEnvVar("MYSQL_USER"),
   },
 
   //
 };
+
+type NestedKeyOf<ObjectType extends object> = {
+  [Key in keyof ObjectType]: ObjectType[Key] extends object
+    ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      /* `${Key}` */ "" | `${Key}_${NestedKeyOf<ObjectType[Key]>}`
+    : Key;
+}[keyof ObjectType];
+
+type EnvName = Uppercase<NestedKeyOf<AppConfig>>;
+function getEnvVar(
+  name: Exclude<EnvName, "_ISCONFIG">,
+  otherwise: string | null = null,
+): string {
+  const val = process.env[name];
+
+  if (val) {
+    return val;
+  }
+
+  if (!otherwise) {
+    throw new Error(`Required environment variable "${name}" wasn't set.`);
+  }
+
+  return otherwise;
+}
 
 export default config;
 
