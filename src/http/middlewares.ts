@@ -1,14 +1,14 @@
 import type { RouterContext } from "@koa/router";
 
-// import { AccessToken } from "../core/entities/Token";
-// import { UserRole } from "../core/entities/User";
-import CoreError from "../core/errors/CoreError";
-import ExternalError from "../core/errors/ExternalError";
-import InputError from "../core/errors/InputError";
-import InternalError from "../core/errors/InternalError";
-import NotFoundError from "../core/errors/NotFoundError";
-import UnauthenticatedError from "../core/errors/UnauthenticatedError";
-import UnauthorizedError from "../core/errors/UnauthorizedError";
+// import { AccessToken } from "../business/entities/Token";
+// import { UserRole } from "../business/entities/User";
+import CoreError from "../business/errors/CoreError";
+import ExternalError from "../business/errors/ExternalError";
+import InputError from "../business/errors/InputError";
+import InternalError from "../business/errors/InternalError";
+import NotFoundError from "../business/errors/NotFoundError";
+import UnauthenticatedError from "../business/errors/UnauthenticatedError";
+import UnauthorizedError from "../business/errors/UnauthorizedError";
 import type { KoaExtendedContext, KoaExtendedState } from "./index";
 
 declare global {

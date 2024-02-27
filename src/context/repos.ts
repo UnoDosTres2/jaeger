@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type InternalError from "../core/errors/InternalError";
+import type InternalError from "../business/errors/InternalError";
 
-import FactoryRepo from "../core/repos/FactoryRepo";
+import FactoryRepo from "../business/repos/FactoryRepo";
 import FactoryRepoMysql from "../repos/FactoryRepoMysql";
 
 type Repos = {

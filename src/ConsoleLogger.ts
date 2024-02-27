@@ -1,4 +1,4 @@
-import type CoreError from "./core/errors/CoreError";
+import type CoreError from "./business/errors/CoreError";
 import {
   LogLevel,
   LoggerConfig,

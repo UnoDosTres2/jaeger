@@ -1,5 +1,5 @@
-import type Factory from "../core/entities/Factory";
-import type FactoryRepo from "../core/repos/FactoryRepo";
+import type Factory from "../business/entities/Factory";
+import type FactoryRepo from "../business/repos/FactoryRepo";
 import { type _type as MysqlType } from "../context/backingServices/mysql";
 
 export default class FactoryRepoMysql implements FactoryRepo {

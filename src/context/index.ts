@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type ExternalError from "../core/errors/ExternalError";
+import type ExternalError from "../business/errors/ExternalError";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type InternalError from "../core/errors/InternalError";
+import type InternalError from "../business/errors/InternalError";
 
 // import { default as initializeDbs } from "./dbs";
 import { default as initializeBackingServices } from "./backingServices";
