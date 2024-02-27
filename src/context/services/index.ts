@@ -8,8 +8,17 @@ declare global {
   }
 }
 
-export default async function initialize(config: AppConfig): Promise<Services> {
+export default async function initialize(
+  config: AppConfig,
+): Promise<[TeardownFn, Services]> {
   // TODO
 
-  return {};
+  return [
+    async () => {
+      // TODO
+    },
+    {
+      // TODO
+    },
+  ];
 }

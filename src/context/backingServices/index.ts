@@ -21,9 +21,9 @@ declare global {
 }
 
 /** @throws {ExternalError || InternalError} */
-export default async (
+export default async function initialize(
   config: AppConfig,
-): Promise<[TeardownFn, AppBackingServices]> => {
+): Promise<[TeardownFn, AppBackingServices]> {
   const [teardown_mysql, mysql] = await initialize_mysql(config.mysql);
   //
 
@@ -39,4 +39,4 @@ export default async (
       //
     },
   ];
-};
+}

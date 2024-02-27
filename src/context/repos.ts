@@ -19,6 +19,7 @@ declare global {
   }
 }
 
+// MAYBE throws BackingService[Initialization]Error - and we can get rid off this vague internal error
 /** @throws {InternalError} */
 export default function initialize(backingServices: AppBackingServices): Repos {
   const repos: Repos = {

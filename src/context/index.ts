@@ -13,9 +13,10 @@ import { type UseCases, default as initializeUseCases } from "./useCases";
 export default async (
   config: AppConfig,
 ): Promise<[TeardownFn, AppContext & { useCases: UseCases }]> => {
-  const [teardownDb, backingServices] = await initializeBackingServices(config);
+  const [teardownBackingServices, backingServices] =
+    await initializeBackingServices(config);
   const repos = initializeRepos(backingServices);
-  const services = initializeServices(config);
+  const [teardownServices, services] = await initializeServices(config);
   const useCases = initializeUseCases({
     _isContext: true,
     repos,
@@ -26,8 +27,9 @@ export default async (
 
   return [
     async () => {
-      await teardownDb();
-      // MAYBE teardown services (but omit logger, to be able to log shutdown messages)
+      // FIXME return Promise.all
+      await teardownBackingServices();
+      await teardownServices();
     },
     {
       _isContext: true,
