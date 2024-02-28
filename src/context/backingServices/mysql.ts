@@ -31,7 +31,7 @@ export default async (config: Config): Promise<[TeardownFn, _type]> => {
 
   return [
     async () => {
-      //
+      await pool.end();
     },
     pool,
   ];
