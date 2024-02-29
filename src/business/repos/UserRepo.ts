@@ -18,5 +18,8 @@ export default interface UserRepo {
   /** @throws {ExternalError} */
   findById(id: string): Promise<User | null>;
 
+  /** @throws {ExternalError} */
+  findAllUsers(): Promise<Array<User>>;
+
   //
 }

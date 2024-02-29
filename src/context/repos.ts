@@ -1,11 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type InternalError from "../business/errors/InternalError";
 
+import UserRepo from "../business/repos/UserRepo";
 import FactoryRepo from "../business/repos/FactoryRepo";
 import FactoryRepoMysql from "../repos/FactoryRepoMysql";
 
 type Repos = {
-  // User: UserRepo;
+  User: UserRepo;
   // Token: TokenRepo;
   // Company: CompanyRepo;
   // Templates: TemplatesRepo;
