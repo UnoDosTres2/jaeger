@@ -56,9 +56,17 @@ async function start() {
   // #endregion Graceful Shutdown
 
   // Start the server, start the app
-  server.listen(config.http.port, config.http.host, () => {
+  server.listen(config.http.port, config.http.host);
+
+  function onServerError(err: Error) {
+    logger.error(err.toString());
+  }
+  server.addListener("error", onServerError);
+
+  function onServerListening() {
     logger.info(`Listening on http://${config.http.host}:${config.http.port}`);
-  });
+  }
+  server.addListener("listening", onServerListening);
 }
 
 start();
