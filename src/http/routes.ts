@@ -10,4 +10,13 @@ export default (router: RouterWithContext): void => {
 
     await next();
   });
+
+  router.get("/users", async (ctx, next) => {
+    // TODO what happens if we DO NOT `await` here?
+    const allUsers = await ctx.repos.User.findAllUsers();
+
+    ctx.body = allUsers;
+
+    await next();
+  });
 };
