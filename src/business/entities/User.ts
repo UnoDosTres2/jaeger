@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-enum UserRole {
+export enum UserRole {
   ADMIN = "adm",
   AUTHOR = "atr",
   MODERATOR = "mod",

@@ -4,6 +4,7 @@ import type InternalError from "../business/errors/InternalError";
 import UserRepo from "../business/repos/UserRepo";
 import FactoryRepo from "../business/repos/FactoryRepo";
 import FactoryRepoMysql from "../repos/FactoryRepoMysql";
+import UserRepoMemory from "../repos/UserRepoMemory";
 
 type Repos = {
   User: UserRepo;
@@ -24,6 +25,7 @@ declare global {
 /** @throws {InternalError} */
 export default function initialize(backingServices: AppBackingServices): Repos {
   const repos: Repos = {
+    User: new UserRepoMemory(),
     // User: new UserRepoMongo(backingServices),
     // Token: new TokenRepoMongo(backingServices),
     // Company: new CompanyRepoMongo(backingServices),

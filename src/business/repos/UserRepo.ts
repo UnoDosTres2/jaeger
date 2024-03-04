@@ -10,7 +10,8 @@ export default interface UserRepo {
   checkIfUsernameOrEmailExists(
     username: string,
     email: string,
-  ): Promise<"username" | "email" | null>;
+  ): Promise<boolean>;
+  // ): Promise<"username" | "email" | null>;
 
   /** @throws {ExternalError} */
   findByUsernameOrEmail(usernameOrEmail: string): Promise<User | null>;
