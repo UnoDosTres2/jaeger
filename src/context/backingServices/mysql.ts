@@ -26,8 +26,8 @@ export default async (config: Config): Promise<[TeardownFn, _type]> => {
   const pool = mysql.createPool(poolOpts);
 
   // TODO find out if those 2 below are needed
-  await pool.connect();
-  await pool.ping();
+  // await pool.connect();
+  // await pool.ping();
 
   return [
     async () => {
