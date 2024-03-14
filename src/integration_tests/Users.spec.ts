@@ -7,6 +7,7 @@ process.env.INTEGRATION_TEST = "true";
 import config from "../config";
 import initializeContext from "../context";
 import initializeKoa from "../http/initializeKoa";
+import { type default as User, UserRole } from "../business/entities/User";
 
 describe("User Endpoints", () => {
   let request;
@@ -29,42 +30,11 @@ describe("User Endpoints", () => {
     await teardown();
   });
 
-  beforeEach(async () => {
-    // TODO populate (e.g. migrate and seed) the database
-    // [
-    //   {
-    //     id: "1",
-    //     username: "john.doe",
-    //     email: "john@does.co",
-    //     password:
-    //       "$2y$10$B22cchaklVxJ4j.moQ02O.ZFym8B47AnYMEOuGtb7C30sfDQRn1US", // 12345
-    //     role: UserRole.ADMIN,
-    //   },
-    //   {
-    //     id: "2",
-    //     username: "jane.doe",
-    //     email: "jane@does.co",
-    //     password:
-    //       "$2y$10$B22cchaklVxJ4j.moQ02O.ZFym8B47AnYMEOuGtb7C30sfDQRn1US", // 12345
-    //     role: UserRole.AUTHOR,
-    //   },
-    //   {
-    //     id: "3",
-    //     username: "baby.doe",
-    //     email: "baby@does.co",
-    //     password:
-    //       "$2y$10$B22cchaklVxJ4j.moQ02O.ZFym8B47AnYMEOuGtb7C30sfDQRn1US", // 12345
-    //     role: UserRole.MODERATOR,
-    //   },
-    //   //
-    // ]
+  afterEach(async () => {
+    mem.user.splice(0, mem.user.length);
   });
 
-  afterEach(() => {
-    mem.user = [];
-  });
-
-  it("should TODO_foo", async () => {
+  it("should respond with empty array", async () => {
     // Arrange
 
     // Act
@@ -76,5 +46,78 @@ describe("User Endpoints", () => {
     //
   });
 
+  it("should respond with a user", async () => {
+    // Arrange
+    //
+    mem.user.push(
+      ...[
+        {
+          id: "1",
+          username: "john.doe",
+          email: "john@does.co",
+          password:
+            "$2y$10$B22cchaklVxJ4j.moQ02O.ZFym8B47AnYMEOuGtb7C30sfDQRn1US", // 12345
+          role: UserRole.ADMIN,
+        },
+      ],
+    );
+
+    // Act
+    const res = await request!.get("/users");
+
+    // Assert
+    //
+    expect(res.body).toHaveProperty("data");
+    const data: Array<User> = res.body.data;
+    expect(data).toHaveLength(1);
+    expect(data[0]).not.toHaveProperty("password"); // TODO BURADA KALDIK
+    expect(data[0].email).toBe(mem.user[0].email); // TODO check if checking like this is valid or false-positive?
+    //
+  });
+
+  it("should respond with users", async () => {
+    // Arrange
+    //
+    mem.user.push(
+      ...[
+        {
+          id: "1",
+          username: "john.doe",
+          email: "john@does.co",
+          password:
+            "$2y$10$B22cchaklVxJ4j.moQ02O.ZFym8B47AnYMEOuGtb7C30sfDQRn1US", // 12345
+          role: UserRole.ADMIN,
+        },
+        {
+          id: "2",
+          username: "jane.doe",
+          email: "jane@does.co",
+          password:
+            "$2y$10$B22cchaklVxJ4j.moQ02O.ZFym8B47AnYMEOuGtb7C30sfDQRn1US", // 12345
+          role: UserRole.AUTHOR,
+        },
+        {
+          id: "3",
+          username: "baby.doe",
+          email: "baby@does.co",
+          password:
+            "$2y$10$B22cchaklVxJ4j.moQ02O.ZFym8B47AnYMEOuGtb7C30sfDQRn1US", // 12345
+          role: UserRole.MODERATOR,
+        },
+        //
+      ],
+    );
+
+    // Act
+    const res = await request!.get("/users");
+
+    // Assert
+    //
+    expect(res.body).toHaveProperty("data");
+    const data: Array<User> = res.body.data;
+    expect(data).toHaveLength(3);
+    expect(data[2].email).toBe(mem.user[2].email); // TODO check if checking like this is valid or false-positive?
+    //
+  });
   //
 });
