@@ -25,7 +25,7 @@ declare global {
 /** @throws {InternalError} */
 export default function initialize(backingServices: AppBackingServices): Repos {
   const repos: Repos = {
-    User: new UserRepoMemory(),
+    User: new UserRepoMemory(backingServices),
     // User: new UserRepoMongo(backingServices),
     // Token: new TokenRepoMongo(backingServices),
     // Company: new CompanyRepoMongo(backingServices),

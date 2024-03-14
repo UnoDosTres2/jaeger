@@ -11,7 +11,15 @@ import { type UseCases, default as initializeUseCases } from "./useCases";
 /** @throws {ExternalError || InternalError} */
 export default async (
   config: AppConfig,
-): Promise<[TeardownFn, AppContext & { useCases: UseCases }]> => {
+): Promise<
+  [
+    TeardownFn,
+    AppContext & {
+      useCases: UseCases;
+      backingServices: AppBackingServices /* FIXME [DNTXPSBSVCS]: DO NOT expose backingServices */;
+    },
+  ]
+> => {
   const [teardownBackingServices, backingServices] =
     await initializeBackingServices(config);
   const repos = initializeRepos(backingServices);
@@ -36,6 +44,7 @@ export default async (
       repos,
       services,
       useCases,
+      backingServices, // FIXME [DNTXPSBSVCS]
     },
   ];
 };
