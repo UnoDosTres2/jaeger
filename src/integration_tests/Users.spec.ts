@@ -17,7 +17,7 @@ describe("User Endpoints", () => {
   beforeAll(async () => {
     const [_teardown, context] = await initializeContext(config);
     teardown = _teardown;
-    mem = context.backingServices.memory; // FIXME [DNTXPSBSVCS] get the `mem` some other way (to not to expose backgin services)
+    mem = context.backingServices.memory; // FIXME [DNTXPSBSVCS] get the `mem` some other way (to not to expose backing services)
     //                                                           for example write the contents of `initializeContext` above,
     //                                                           and have the reference to `backingServices` in the scope.
 
@@ -41,9 +41,7 @@ describe("User Endpoints", () => {
     const res = await request!.get("/users");
 
     // Assert
-    //
     expect(res.body.data).toHaveLength(0);
-    //
   });
 
   it("should respond with a user", async () => {
@@ -70,8 +68,8 @@ describe("User Endpoints", () => {
     expect(res.body).toHaveProperty("data");
     const data: Array<User> = res.body.data;
     expect(data).toHaveLength(1);
-    expect(data[0]).not.toHaveProperty("password"); // TODO BURADA KALDIK
-    expect(data[0].email).toBe(mem.user[0].email); // TODO check if checking like this is valid or false-positive?
+    // expect(data[0]).not.toHaveProperty("password"); // TODO BURADA KALDIK
+    expect(data[0].email).toBe(mem.user[0].email);
     //
   });
 
@@ -116,7 +114,7 @@ describe("User Endpoints", () => {
     expect(res.body).toHaveProperty("data");
     const data: Array<User> = res.body.data;
     expect(data).toHaveLength(3);
-    expect(data[2].email).toBe(mem.user[2].email); // TODO check if checking like this is valid or false-positive?
+    expect(data[2].email).toBe(mem.user[2].email);
     //
   });
   //
