@@ -3,8 +3,7 @@ import type ExternalError from "../business/errors/ExternalError";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type InternalError from "../business/errors/InternalError";
 
-// import { default as initializeDbs } from "./dbs";
-import { default as initializeBackingServices } from "./backingServices";
+import { default as initializeBackingServices } from "./backingServices"; // FIXME [BTFNDBTTRNM]: find a better name. BT: "OuterServices"
 import { default as initializeRepos } from "./repos";
 import { default as initializeServices } from "./services";
 import { type UseCases, default as initializeUseCases } from "./useCases";
@@ -17,7 +16,7 @@ export default async (
     await initializeBackingServices(config);
   const repos = initializeRepos(backingServices);
   const [teardownServices, services] = await initializeServices(config);
-  const useCases = initializeUseCases({
+  const useCases = await initializeUseCases({
     _isContext: true,
     repos,
     services,

@@ -1,11 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type InternalError from "../business/errors/InternalError";
 
+import UserRepo from "../business/repos/UserRepo";
 import FactoryRepo from "../business/repos/FactoryRepo";
 import FactoryRepoMysql from "../repos/FactoryRepoMysql";
+import UserRepoMemory from "../repos/UserRepoMemory";
 
 type Repos = {
-  // User: UserRepo;
+  User: UserRepo;
   // Token: TokenRepo;
   // Company: CompanyRepo;
   // Templates: TemplatesRepo;
@@ -23,6 +25,7 @@ declare global {
 /** @throws {InternalError} */
 export default function initialize(backingServices: AppBackingServices): Repos {
   const repos: Repos = {
+    User: new UserRepoMemory(backingServices),
     // User: new UserRepoMongo(backingServices),
     // Token: new TokenRepoMongo(backingServices),
     // Company: new CompanyRepoMongo(backingServices),

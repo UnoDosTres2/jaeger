@@ -9,7 +9,7 @@ import InternalError from "../business/errors/InternalError";
 import NotFoundError from "../business/errors/NotFoundError";
 import UnauthenticatedError from "../business/errors/UnauthenticatedError";
 import UnauthorizedError from "../business/errors/UnauthorizedError";
-import type { KoaExtendedContext, KoaExtendedState } from "./index";
+import type { KoaExtendedContext, KoaExtendedState } from "./types";
 
 declare global {
   interface AppKoaState {

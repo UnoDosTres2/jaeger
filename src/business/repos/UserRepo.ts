@@ -10,13 +10,17 @@ export default interface UserRepo {
   checkIfUsernameOrEmailExists(
     username: string,
     email: string,
-  ): Promise<"username" | "email" | null>;
+  ): Promise<boolean>;
+  // ): Promise<"username" | "email" | null>;
 
   /** @throws {ExternalError} */
   findByUsernameOrEmail(usernameOrEmail: string): Promise<User | null>;
 
   /** @throws {ExternalError} */
   findById(id: string): Promise<User | null>;
+
+  /** @throws {ExternalError} */
+  findAllUsers(): Promise<Array<User>>; // FIXME export a type and use it here and here [ADLSAHDKSA]
 
   //
 }

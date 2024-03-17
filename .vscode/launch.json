@@ -19,6 +19,13 @@
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
+      "_FIXME_1": "get rid off things below",
+      "env": {
+        "SWCRC": "1",
+        "MYSQL_DATABASE": "solarhyp",
+        "MYSQL_USER": "root",
+        "MYSQL_PASSWORD": "toor",
+      },
     },
     {
       "type": "node",
