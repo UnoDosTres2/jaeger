@@ -3,7 +3,7 @@ import type ExternalError from "../business/errors/ExternalError";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type InternalError from "../business/errors/InternalError";
 
-import { default as initializeBackingServices } from "./backingServices"; // FIXME find a better name. BT: "OuterServices"
+import { default as initializeBackingServices } from "./backingServices"; // FIXME [BTFNDBTTRNM]: find a better name. BT: "OuterServices"
 import { default as initializeRepos } from "./repos";
 import { default as initializeServices } from "./services";
 import { type UseCases, default as initializeUseCases } from "./useCases";
@@ -11,20 +11,12 @@ import { type UseCases, default as initializeUseCases } from "./useCases";
 /** @throws {ExternalError || InternalError} */
 export default async (
   config: AppConfig,
-): Promise<
-  [
-    TeardownFn,
-    AppContext & {
-      useCases: UseCases;
-      backingServices: AppBackingServices /* FIXME [DNTXPSBSVCS]: DO NOT expose backingServices */;
-    },
-  ]
-> => {
+): Promise<[TeardownFn, AppContext & { useCases: UseCases }]> => {
   const [teardownBackingServices, backingServices] =
     await initializeBackingServices(config);
   const repos = initializeRepos(backingServices);
   const [teardownServices, services] = await initializeServices(config);
-  const useCases = initializeUseCases({
+  const useCases = await initializeUseCases({
     _isContext: true,
     repos,
     services,
@@ -44,7 +36,6 @@ export default async (
       repos,
       services,
       useCases,
-      backingServices, // FIXME [DNTXPSBSVCS]
     },
   ];
 };

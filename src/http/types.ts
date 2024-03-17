@@ -18,4 +18,4 @@ export type KoaExtendedContext = Koa.DefaultContext & {
    * @deprecated Use the keyword `throw` instead; e.g. `throw new CoreError`
    */
   throw: never;
-} & AppContext;
+} & Omit<AppContext, "repos">;

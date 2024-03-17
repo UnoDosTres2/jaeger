@@ -5,7 +5,13 @@ process.env.INTEGRATION_TEST = "true";
 // NOTE We deliberately want to resemble the production environment since
 //      this is an integration test, hence config and context below.
 import config from "../config";
-import initializeContext from "../context";
+import { default as initializeBackingServices } from "../context/backingServices"; // FIXME [BTFNDBTTRNM]
+import { default as initializeServices } from "../context/services";
+import {
+  type UseCases,
+  default as initializeUseCases,
+} from "../context/useCases";
+import { default as initializeRepos } from "../context/repos";
 import initializeKoa from "../http/initializeKoa";
 import { type default as User, UserRole } from "../business/entities/User";
 
@@ -15,13 +21,31 @@ describe("User Endpoints", () => {
   let teardown: TeardownFn;
 
   beforeAll(async () => {
-    const [_teardown, context] = await initializeContext(config);
-    teardown = _teardown;
-    mem = context.backingServices.memory; // FIXME [DNTXPSBSVCS] get the `mem` some other way (to not to expose backing services)
-    //                                                           for example write the contents of `initializeContext` above,
-    //                                                           and have the reference to `backingServices` in the scope.
+    const [teardownBackingServices, backingServices] =
+      await initializeBackingServices(config);
+    const repos = initializeRepos(backingServices);
+    const [teardownServices, services] = await initializeServices(config);
+    const useCases = await initializeUseCases({
+      _isContext: true,
+      repos,
+      services,
+    });
 
-    const koa = initializeKoa(config.http, context);
+    teardown = async () => {
+      // FIXME return Promise.all
+      await teardownBackingServices();
+      await teardownServices();
+    };
+
+    mem = backingServices.memory;
+
+    const koa = initializeKoa(config.http, {
+      _isContext: true,
+
+      repos,
+      services,
+      useCases,
+    });
 
     request = _request(koa.callback());
   });

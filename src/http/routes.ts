@@ -12,11 +12,9 @@ export default (router: RouterWithContext): void => {
   });
 
   router.get("/users", async (ctx, next) => {
-    // FIXME use the use-case here - NOT the repo directly (MAYBE HATTA VE HATTA buradaki (app)context type'ında `repos` olmasın)
+    const allUsers = await ctx.useCases.Users.findAllUsers();
 
-    // TODO what happens if we DO NOT `await` here?
-    const allUsers = await ctx.repos.User.findAllUsers();
-
+    // TODO MAYBE ensure the return type (the one that the `ctx.body` set to)
     ctx.body = allUsers;
 
     await next();

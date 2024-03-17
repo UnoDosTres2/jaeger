@@ -20,7 +20,7 @@ export default interface UserRepo {
   findById(id: string): Promise<User | null>;
 
   /** @throws {ExternalError} */
-  findAllUsers(): Promise<Array<User>>;
+  findAllUsers(): Promise<Array<User>>; // FIXME export a type and use it here and here [ADLSAHDKSA]
 
   //
 }
